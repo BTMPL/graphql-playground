@@ -1,0 +1,9 @@
+type Document @key(fields: "id") {
+  id: ID!
+  name: String!
+  type: String!
+}
+
+type Query {
+  documents: [Document!]!
+}

@@ -1,0 +1,32 @@
+type Loan @key(fields: "id") {
+  id: ID!
+  name: String!
+  date: String!
+  fee: [FeeBase!]!
+  documents: [Document!]!
+}
+
+interface FeeBase {
+  id: String!
+  type: String!
+}
+
+type Fee implements FeeBase {
+  id: String!
+  type: String!
+  value: Int!
+}
+
+type Fees implements FeeBase {
+  id: String!
+  type: String!
+  value: [Int!]!
+}
+
+type Query {
+  loans: [Loan!]!
+}
+
+type Document @key(fields: "id") {
+  id: ID!
+}
