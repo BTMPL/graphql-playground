@@ -8,6 +8,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export class LoanConfigInput {
+    productId?: Nullable<string>;
+    createdAfter?: Nullable<string>;
+    createdBefore?: Nullable<string>;
+}
+
+export class LoanInput {
+    userId: string;
+    config: LoanConfigInput;
+}
+
 export interface FeeBase {
     id: string;
     type: string;
@@ -34,7 +45,7 @@ export class Fees implements FeeBase {
 }
 
 export abstract class IQuery {
-    abstract loans(): Loan[] | Promise<Loan[]>;
+    abstract loans(input?: Nullable<LoanInput>): Loan[] | Promise<Loan[]>;
 }
 
 export class Document {

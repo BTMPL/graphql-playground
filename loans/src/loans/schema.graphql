@@ -23,8 +23,19 @@ type Fees implements FeeBase {
   value: [Int!]!
 }
 
+input LoanConfigInput {
+  productId: ID
+  createdAfter: String
+  createdBefore: String
+}
+
+input LoanInput {
+  userId: String!
+  config: LoanConfigInput!
+}
+
 type Query {
-  loans: [Loan!]!
+  loans(input: LoanInput): [Loan!]!
 }
 
 type Document @key(fields: "id") {

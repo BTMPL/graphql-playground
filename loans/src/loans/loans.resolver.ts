@@ -1,5 +1,7 @@
-import { Query, Resolver } from '@nestjs/graphql';
-import { FeeBase, Loan } from 'src/graphql';
+import { UsePipes } from '@nestjs/common';
+import { Query, Resolver, Args } from '@nestjs/graphql';
+import { FeeBase, Loan, LoanInput } from 'src/graphql';
+import { loanInput, ZodValidationPipe } from './validation';
 
 const loans = [
   {
@@ -29,7 +31,8 @@ const loans = [
 @Resolver('Loan')
 export class LoansResolver {
   @Query()
-  async loans(): Promise<Loan[]> {
+  @UsePipes(new ZodValidationPipe(loanInput))
+  async loans(@Args('input') input: LoanInput): Promise<Loan[]> {
     return loans;
   }
 }
